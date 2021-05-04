@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_circular_indicator_loading/widgets/loading_check_text.dart';
 
@@ -50,7 +52,9 @@ class LoadingIndicator extends StatefulWidget {
   /// CheckBox IconsData
   final IconData? iconData;
 
+  /// Finished checkAction
   ///
+  /// whatever you want to do afterwards write here
   final Function? setCheck;
 
   ///
@@ -100,6 +104,12 @@ class _LoadingIndicatorState extends State<LoadingIndicator>
       }
     });
 
+    _controllerIndicator!.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        widget.setCheck!.call();
+      }
+    });
+
     _indicatorAnimation = CurvedAnimation(
       parent: _controllerIndicator!,
       curve: Interval(0.0, 1.0),
@@ -125,6 +135,12 @@ class _LoadingIndicatorState extends State<LoadingIndicator>
 
   /// Indicator Color.
   Color color = Colors.blue;
+
+  void setColor(Color colors) {
+    setState(() {
+      color = colors;
+    });
+  }
 
   /// Action Started.
   setCheck() {
@@ -156,7 +172,7 @@ class _LoadingIndicatorState extends State<LoadingIndicator>
                     decoration: BoxDecoration(
                         color: Colors.green, shape: BoxShape.circle),
                     child: Icon(
-                      Icons.check,
+                      widget.iconData ?? Icons.check,
                       color: Colors.white,
                       size: 40.0,
                     ),
@@ -177,6 +193,7 @@ class _LoadingIndicatorState extends State<LoadingIndicator>
             itemBuilder: (context, index) => LoadingCheckBox(
               animation: _checkAnimation[index],
               text: widget.readyText[index],
+              color: widget.textColor,
             ),
           ),
         )

@@ -10,6 +10,9 @@ This Project have Circular indicator and animation checkBox.
 ## How To Use
 
 ```dart
+/// how many need checkBox you can added 
+///
+///
 /// See also
 ///     * indicator color
 ///     * checkBox color

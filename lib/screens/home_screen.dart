@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_circular_indicator_loading/screens/screen.dart';
 import '../widgets/widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -32,6 +33,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     'Check Photos',
                     'Check everyOne',
                   ],
+                  setCheck: () => Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => OtherScreen())),
                 ),
               ],
             ),
