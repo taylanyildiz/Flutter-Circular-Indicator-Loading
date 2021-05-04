@@ -100,7 +100,6 @@ class _LoadingIndicatorState extends State<LoadingIndicator>
     _controllerCheckBox!.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         setIndicatorVisibilty();
-        _controllerIndicator!.forward();
       }
     });
 
@@ -118,13 +117,17 @@ class _LoadingIndicatorState extends State<LoadingIndicator>
     for (var i = 0; i < widget.readyText.length; i++) {
       _checkAnimation.add(CurvedAnimation(
           parent: _controllerCheckBox!,
-          curve: Interval((1 / widget.readyText.length) * i,
+          curve: Interval((1 / widget.readyText.length) * (i + 0.7),
               (1 / widget.readyText.length) * (i + 1))));
     }
   }
 
   bool visibleIndicator = true;
-  void setIndicatorVisibilty() => setState(() => visibleIndicator = false);
+  void setIndicatorVisibilty() async {
+    await Future.delayed(
+        Duration(seconds: 2), () => _controllerIndicator!.forward());
+    setState(() => visibleIndicator = false);
+  }
 
   @override
   void dispose() {
