@@ -3,12 +3,9 @@
 This Project have Circular indicator and animation checkBox.
 
 
-
-
-
-|             App Home               |
-:----------------------------------: |
-| <a  target="_blank"><img src="https://user-images.githubusercontent.com/37551474/117022174-b0a2da00-ad00-11eb-9826-6d95056a144b.png" width="250"></a>|
+|              App Screenshot          |
+| :----------------------------------: | 
+| <a  target="_blank"><img src="https://user-images.githubusercontent.com/37551474/117023094-75ed7180-ad01-11eb-81ff-a5a8957c00bc.gif" width="250"></a> | 
 
 ## How To Use
 
