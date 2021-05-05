@@ -23,6 +23,8 @@ This Project have Circular indicator and animation checkBox.
     'Check Photos',
     'Check everyOne',
     ],
+    /// All Check ready??
+    setCheck: () => Navigator.push(context,MaterialPageRoute(builder:(context) => OtherScreen())),
 ),
 ```
 
