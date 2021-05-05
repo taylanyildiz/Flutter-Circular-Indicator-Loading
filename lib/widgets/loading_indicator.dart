@@ -26,7 +26,27 @@ class _LoadingScope extends InheritedWidget {
 
 class LoadingIndicator extends StatefulWidget {
   /// Constructor [LoadingIndicator]
-  const LoadingIndicator({
+  ///
+
+  LoadingIndicator({
+    Key? key,
+    required List<String> readyText,
+    IconData? iconData,
+    Color? checkColor,
+    Color? readyColor,
+    Color? textColor,
+    Function? setCheck,
+  }) : this.builder(
+          key: key,
+          readyText: readyText,
+          iconData: iconData,
+          checkColor: checkColor,
+          readyColor: readyColor,
+          textColor: textColor,
+          setCheck: setCheck,
+        );
+
+  const LoadingIndicator.builder({
     Key? key,
     required this.readyText,
     this.iconData,
@@ -126,7 +146,7 @@ class _LoadingIndicatorState extends State<LoadingIndicator>
   void setIndicatorVisibilty() async {
     await Future.delayed(
         Duration(seconds: 2), () => _controllerIndicator!.forward());
-    setState(() => visibleIndicator = false);
+    visibleIndicator = false;
   }
 
   @override
@@ -139,11 +159,11 @@ class _LoadingIndicatorState extends State<LoadingIndicator>
   /// Indicator Color.
   Color color = Colors.blue;
 
-  void setColor(Color colors) {
-    setState(() {
-      color = colors;
-    });
-  }
+  // void setColor(Color colors) {
+  //   setState(() {
+  //     color = colors;
+  //   });
+  // }
 
   /// Action Started.
   setCheck() {
@@ -161,7 +181,10 @@ class _LoadingIndicatorState extends State<LoadingIndicator>
               children: [
                 Visibility(
                   visible: visibleIndicator,
-                  child: CircularProgressIndicator(),
+                  child: CircularProgressIndicator(
+                    valueColor:
+                        _indicatorAnimation!.drive(ColorTween(begin: color)),
+                  ),
                 ),
                 Transform.scale(
                   scale: _indicatorAnimation!
@@ -172,8 +195,8 @@ class _LoadingIndicatorState extends State<LoadingIndicator>
                       .value,
                   child: Container(
                     padding: EdgeInsets.all(3.0),
-                    decoration: BoxDecoration(
-                        color: Colors.green, shape: BoxShape.circle),
+                    decoration:
+                        BoxDecoration(color: color, shape: BoxShape.circle),
                     child: Icon(
                       widget.iconData ?? Icons.check,
                       color: Colors.white,
